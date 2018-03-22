@@ -7,13 +7,16 @@
 class hashTableClass{
 private:	
 	
-public:	
-	int *nextChain;
+	int hashKey;
+	int value;
+	hashTableClass *nextChain;
 
-	int hashValue;
+public:	
+
+	
 	int getHash(int x);
 	void showTable(hashTableClass *hashTable);
-	void inputElement(hashTableClass *hashTable);
+	hashTableClass* inputElement(hashTableClass *hashTable);
 };
 
 #endif HASHTABLECLASS_H
