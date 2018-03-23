@@ -59,7 +59,7 @@ void hashTableClass::showTable(hashTableClass *hashTablePointer){
 			hashTablePointer ++;
 			
 	}
-
+	cout << endl;
 };
 
 hashTableClass* hashTableClass::inputElement(hashTableClass *hashTablePointer){
@@ -68,15 +68,23 @@ hashTableClass* hashTableClass::inputElement(hashTableClass *hashTablePointer){
 	cout << "Input your value: ";
 	cin >> input ;
 
-	hashTableClass *newChainElement = new hashTableClass();
+	
 
 	hashKey = getHash(input);
 
 	
 	hashTablePointer = hashTablePointer + hashKey;
 	hashTablePointer->hashKey = hashKey;
+	
+	
+	
+	
+	while(hashTablePointer->nextChain != nullptr){
+		hashTablePointer = hashTablePointer ->nextChain;
+		}
 
-    hashTablePointer->nextChain = newChainElement;
+	hashTableClass *newChainElement = new hashTableClass();
+	hashTablePointer->nextChain = newChainElement;
 
 	newChainElement -> hashKey = hashKey;
 	newChainElement -> value = input;
