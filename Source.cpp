@@ -1,4 +1,5 @@
 #include <iostream>
+#include <conio.h>
 #include "hashTableClass.h"
 
 using namespace std;
@@ -7,25 +8,23 @@ int main(){
 
 	int input;
 	hashTableClass *hashTable = new hashTableClass[size]();
-
-	
-	
 	
 	do {	
-		cout << "Choose option: " << endl << "0. Exit program \n 1. Input element \n 2. Find element \n 3. Delete element \n 4. Show element" << endl;
+		cout << endl << "Choose option: " << endl << "0. Exit program \n 1. Input element \n 2. Find element \n 3. Delete element \n 4. Show element" << endl;
 		cout << "My option is: ";
 		cin >> input;
 		cout << endl;
 
-
 		hashTableClass *hashTablePointer = hashTable;
-		
 
 		switch (input){
 			case 0: 
 				break;
 			case 1:
 				hashTablePointer = hashTable->inputElement(hashTablePointer);
+				break;
+			case 2: 
+				hashTablePointer = hashTable->findElement(hashTablePointer);
 				break;
 			case 4: 
 				 hashTable->showTable(hashTable);
@@ -37,10 +36,10 @@ int main(){
 		}
 
 	} while (input != 0);
-	
-	
-		
+			
 	delete [] hashTable;
+	cout << endl << "Press any button to exit" << endl;
+	getche();
 
 	return 0;
 };
