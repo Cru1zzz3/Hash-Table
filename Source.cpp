@@ -26,6 +26,9 @@ int main(){
 			case 2: 
 				hashTablePointer = hashTable->findElement(hashTablePointer);
 				break;
+			case 3:
+				hashTablePointer = hashTable->deleteElement(hashTablePointer);
+				break;
 			case 4: 
 				 hashTable->showTable(hashTable);
 				break;

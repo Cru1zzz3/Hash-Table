@@ -11,14 +11,12 @@ private:
 	hashTableClass *nextChain;
 public:	
 	
-	// Конструктор класса hashTableClass
 	hashTableClass(){
 		hashKey = NULL;
 		value = NULL;
 		nextChain = nullptr;
 	}
 
-	// Деструкторф класса hashTableClass
 	~hashTableClass(){
 		std::cout << "Destructor of hashTableClass has been called! "<< std::endl;	
 	};
@@ -27,6 +25,7 @@ public:
 	void showTable(hashTableClass *hashTablePointer);
 	hashTableClass* inputElement(hashTableClass *hashTablePointer);
 	hashTableClass* findElement(hashTableClass *hashTablePointer);
+	hashTableClass* deleteElement (hashTableClass *hashTablePointer);
 };
 
 #endif HASHTABLECLASS_H

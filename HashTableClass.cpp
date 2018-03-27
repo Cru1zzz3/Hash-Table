@@ -4,9 +4,8 @@
 using namespace std;
 
 int hashTableClass::getHash(int hash){
-	
-	hash = hash % size;
 
+	hash = hash % size;
 	return (hash);
 };
 
@@ -50,13 +49,13 @@ hashTableClass* hashTableClass::findElement(hashTableClass *hashTablePointer){
 	hashTablePointer ->hashKey = hashKey;
 
 
-	if (hashTablePointer->nextChain != nullptr) do {
+	while ((hashTablePointer ->nextChain != nullptr) && (find == false)){
 		hashTablePointer = hashTablePointer -> nextChain;
 		if (hashTablePointer -> value == input){
 			find = true;
 			break;
 		}
-	} while ( (hashTablePointer -> value != NULL) || (find != true));
+	};
 	
 	if (find){
 		cout << "Element with value " << input << " successfully found!" << endl;
@@ -66,6 +65,47 @@ hashTableClass* hashTableClass::findElement(hashTableClass *hashTablePointer){
 		cout << "Element with value " << input << " is not found!" << endl ;
 		return hashTablePointer;
 	}
+};
+
+hashTableClass* hashTableClass::deleteElement (hashTableClass *hashTablePointer){
+	
+	int input;
+	bool deleted = false;
+	cout << "Delete element: ";
+	cin >> input ;
+
+	hashKey = getHash(input);
+
+	hashTablePointer = hashTablePointer + hashKey;
+	hashTablePointer ->hashKey = hashKey;
+
+	while ((hashTablePointer ->nextChain != nullptr) && (deleted == false)) {
+		
+		hashTableClass *previousChain = hashTablePointer;
+		hashTablePointer = hashTablePointer -> nextChain;
+
+		if (hashTablePointer -> value == input){
+			
+			hashTableClass *deleteChain = previousChain->nextChain;
+
+			previousChain->nextChain = deleteChain->nextChain;
+			
+			delete deleteChain;
+			deleted = true;
+			break;
+		}
+	};
+	
+	if (deleted){
+		cout << "Element with value " << input << " successfully deleted!" << endl;
+		return hashTablePointer;
+	}
+	else {
+		cout << "Delete error! Element with value " << input << " is not found!" << endl ;
+		return hashTablePointer;
+	}
+	
+
 };
 
 hashTableClass* hashTableClass::inputElement(hashTableClass *hashTablePointer){
