@@ -23,9 +23,9 @@ public:
 	
 	int getHash(int x);
 	void showTable(hashTableClass *hashTablePointer);
-	hashTableClass* inputElement(hashTableClass *hashTablePointer);
-	hashTableClass* findElement(hashTableClass *hashTablePointer);
-	hashTableClass* deleteElement (hashTableClass *hashTablePointer);
+	hashTableClass* inputElement(int input,hashTableClass *hashTablePointer);
+	hashTableClass* findElement(int input,hashTableClass *hashTablePointer);
+	hashTableClass* deleteElement (int input,hashTableClass *hashTablePointer);
 };
 
 #endif HASHTABLECLASS_H

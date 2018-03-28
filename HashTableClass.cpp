@@ -9,45 +9,43 @@ int hashTableClass::getHash(int hash){
 	return (hash);
 };
 
-void hashTableClass::showTable(hashTableClass *hashTablePointer){
+hashTableClass* hashTableClass::inputElement(int input,hashTableClass *hashTablePointer){
 
-	cout << "Hash table is: "<< endl;
-
-	hashTablePointer->hashKey = NULL;
-
-	for (int i=0; i != size; i++){ 
-
-		hashTableClass *chainPointer = hashTablePointer;
-
-		cout << i << " ";
-
-		if (chainPointer ->nextChain != nullptr){
-		chainPointer = chainPointer ->nextChain;
-
-			while (chainPointer != nullptr){
-				cout << chainPointer->value << " ";
-				chainPointer = chainPointer ->nextChain;
-			}
+	hashKey = getHash(input);
+	
+	hashTablePointer = hashTablePointer + hashKey;
+	hashTablePointer->hashKey = hashKey;
+	
+	while(hashTablePointer->nextChain != nullptr){
+		hashTablePointer = hashTablePointer ->nextChain;
+		if (hashTablePointer->value == input){
+			cout << "Element with value " << input << " already exists!" << endl;
+			return(hashTablePointer);
 		}
-			cout << endl;
-			hashTablePointer ++;
-			
 	}
-	cout << endl;
+	
+		hashTableClass *newChainElement = new hashTableClass();
+		hashTablePointer->nextChain = newChainElement;
+
+		newChainElement -> hashKey = hashKey;
+		newChainElement -> value = input;
+		newChainElement -> nextChain = nullptr;
+
+		cout << "New element with value " << newChainElement->value
+		<< " successfully added! \t Hash is: " << hashKey <<endl << endl;
+
+	return (hashTablePointer);	
 };
 
-hashTableClass* hashTableClass::findElement(hashTableClass *hashTablePointer){
+
+hashTableClass* hashTableClass::findElement(int input,hashTableClass *hashTablePointer){
 	
-	int input;
 	bool find = false;
-	cout << "Find element: ";
-	cin >> input ;
 
 	hashKey = getHash(input);
 
 	hashTablePointer = hashTablePointer + hashKey;
 	hashTablePointer ->hashKey = hashKey;
-
 
 	while ((hashTablePointer ->nextChain != nullptr) && (find == false)){
 		hashTablePointer = hashTablePointer -> nextChain;
@@ -58,7 +56,9 @@ hashTableClass* hashTableClass::findElement(hashTableClass *hashTablePointer){
 	};
 	
 	if (find){
-		cout << "Element with value " << input << " successfully found!" << endl;
+		cout << "Element with value " << input << " successfully found!" << endl
+			 << "Value: " << hashTablePointer->value << "\t Hash key: "<< hashTablePointer ->hashKey << endl
+			 << "Next chain: " << hashTablePointer->nextChain << endl;
 		return hashTablePointer;
 	}
 	else {
@@ -67,12 +67,9 @@ hashTableClass* hashTableClass::findElement(hashTableClass *hashTablePointer){
 	}
 };
 
-hashTableClass* hashTableClass::deleteElement (hashTableClass *hashTablePointer){
+hashTableClass* hashTableClass::deleteElement (int input,hashTableClass *hashTablePointer){
 	
-	int input;
 	bool deleted = false;
-	cout << "Delete element: ";
-	cin >> input ;
 
 	hashKey = getHash(input);
 
@@ -108,34 +105,29 @@ hashTableClass* hashTableClass::deleteElement (hashTableClass *hashTablePointer)
 
 };
 
-hashTableClass* hashTableClass::inputElement(hashTableClass *hashTablePointer){
+void hashTableClass::showTable(hashTableClass *hashTablePointer){
 
-	int input;
-	cout << "Input your value: ";
-	cin >> input ;
+	cout << "Hash table is: "<< endl;
 
-	hashKey = getHash(input);
-	
-	hashTablePointer = hashTablePointer + hashKey;
-	hashTablePointer->hashKey = hashKey;
-	
-	while(hashTablePointer->nextChain != nullptr){
-		hashTablePointer = hashTablePointer ->nextChain;
-		if (hashTablePointer->value == input){
-			cout << "Element with value " << input << " already exists!" << endl;
-			return(hashTablePointer);
+	hashTablePointer->hashKey = NULL;
+
+	for (int i=0; i != size; i++){ 
+
+		hashTableClass *chainPointer = hashTablePointer;
+
+		cout << i << " ";
+
+		if (chainPointer ->nextChain != nullptr){
+		chainPointer = chainPointer ->nextChain;
+
+			while (chainPointer != nullptr){
+				cout << chainPointer->value << " ";
+				chainPointer = chainPointer ->nextChain;
+			}
 		}
+			cout << endl;
+			hashTablePointer ++;
+			
 	}
-	
-		hashTableClass *newChainElement = new hashTableClass();
-		hashTablePointer->nextChain = newChainElement;
-
-		newChainElement -> hashKey = hashKey;
-		newChainElement -> value = input;
-		newChainElement -> nextChain = nullptr;
-
-		cout << "New element with value " << newChainElement->value
-		<< " successfully added! \t Hash is: " << hashKey <<endl << endl;
-
-	return (hashTablePointer);	
+	cout << endl;
 };

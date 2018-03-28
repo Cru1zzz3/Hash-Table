@@ -6,28 +6,35 @@ using namespace std;
 
 int main(){
 
-	int input;
+	int input,option;
 	hashTableClass *hashTable = new hashTableClass[size]();
 	
 	do {	
 		cout << endl << "Choose option: " << endl << "0. Exit program \n 1. Input element \n 2. Find element \n 3. Delete element \n 4. Show element" << endl;
 		cout << "My option is: ";
-		cin >> input;
+		cin >> option;
 		cout << endl;
 
 		hashTableClass *hashTablePointer = hashTable;
 
-		switch (input){
+		switch (option){
 			case 0: 
 				break;
 			case 1:
-				hashTablePointer = hashTable->inputElement(hashTablePointer);
+				cout << "Input your value: ";
+				cin >> input ;
+				hashTablePointer = hashTable->inputElement(input,hashTablePointer);
 				break;
 			case 2: 
-				hashTablePointer = hashTable->findElement(hashTablePointer);
+				cout << "Find element: ";
+				cin >> input ;
+				hashTablePointer = hashTable->findElement(input,hashTablePointer);
 				break;
 			case 3:
-				hashTablePointer = hashTable->deleteElement(hashTablePointer);
+				cout << "Delete element: ";
+				cin >> input ;
+
+				hashTablePointer = hashTable->deleteElement(input,hashTablePointer);
 				break;
 			case 4: 
 				 hashTable->showTable(hashTable);
@@ -38,7 +45,7 @@ int main(){
 				break;
 		}
 
-	} while (input != 0);
+	} while (option != 0);
 			
 	delete [] hashTable;
 	cout << endl << "Press any button to exit" << endl;
