@@ -1,11 +1,19 @@
 #include <iostream>
 #include "hashTableClass.h"
+#include <cassert>
+
+
+#define TESTVALUE 100
 
 using namespace std;
 
 int hashTableClass::getHash(int hash){
 
 	hash = hash % size;
+
+	if (hash < 0)
+		hash = -hash;
+
 	return (hash);
 };
 
@@ -35,6 +43,14 @@ hashTableClass* hashTableClass::inputElement(int input,hashTableClass *hashTable
 		<< " successfully added! \t Hash is: " << hashKey <<endl << endl;
 
 	return (hashTablePointer);	
+};
+
+void hashTableClass::Test_inputElement(hashTableClass *hashTable){
+	hashTableClass *currentElement = hashTable;
+	for (int input = -(TESTVALUE); input != TESTVALUE; input++){
+		currentElement->inputElement(input,currentElement);
+			}
+	
 };
 
 
@@ -115,17 +131,20 @@ void hashTableClass::showTable(hashTableClass *hashTablePointer){
 
 		hashTableClass *chainPointer = hashTablePointer;
 
-		cout << i << " ";
+		cout << "Hash key "<< i << ": \t";
 
 		if (chainPointer ->nextChain != nullptr){
 		chainPointer = chainPointer ->nextChain;
 
 			while (chainPointer != nullptr){
-				cout << chainPointer->value << " ";
+					cout << chainPointer->value ;
+					if (chainPointer->nextChain != nullptr) {
+						cout << " -> ";
+					}
 				chainPointer = chainPointer ->nextChain;
 			}
 		}
-			cout << endl;
+			cout << endl << endl;
 			hashTablePointer ++;
 			
 	}

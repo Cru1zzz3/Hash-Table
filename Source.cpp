@@ -10,7 +10,10 @@ int main(){
 	hashTableClass *hashTable = new hashTableClass[size]();
 	
 	do {	
-		cout << endl << "Choose option: " << endl << "0. Exit program \n 1. Input element \n 2. Find element \n 3. Delete element \n 4. Show element" << endl;
+		cout << endl << "Choose option: " << endl << "0. Exit program \n 1. Input element \n 2. Find element \n 3. Delete element \n 4. Show hash table \n " << endl;   
+		cout << "Test methods: " <<  "11. Test method '1.Input element'" <<  endl << endl;
+		
+
 		cout << "My option is: ";
 		cin >> option;
 		cout << endl;
@@ -39,6 +42,11 @@ int main(){
 			case 4: 
 				 hashTable->showTable(hashTable);
 				break;
+			
+
+			case 11:
+				hashTable->Test_inputElement(hashTable);
+				break;
 			default:
 				cout << "Incorrect option. Please try again" << endl;
 				input = -1;
@@ -49,7 +57,7 @@ int main(){
 			
 	delete [] hashTable;
 	cout << endl << "Press any button to exit" << endl;
-	getche();
+	//getch();
 
 	return 0;
 };
